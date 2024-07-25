@@ -1,22 +1,89 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Change Font</title>
-  <style>
-    body {
-      width: 200px;
-      padding: 10px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-    }
-  </style>
+    <title>Change Font</title>
+    <style>
+        body {
+            width: 250px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .title1 {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1;
+            right: 0;
+        }
+
+        .dropdown-content label,
+        .dropdown-content select,
+        .dropdown-content input[type="range"],
+        .dropdown-content #fontSizeValue,
+        .dropdown-content button {
+            display: block;
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        .dropdown-content button {
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .dropdown .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-  <h3>Change Font to Arial</h3>
-  <button id="changeFontButton">Change Font</button>
-  <script src="popup.js"></script>
+    <div class="title1">
+        <h3 class="title">Change Font</h3>
+        <div class="dropdown">
+            <button class="dropbtn" id="settingsButton">⋮</button>
+            <div class="dropdown-content" id="settingsMenu">
+                <label for="fontFamily">Font Family</label>
+                <select id="fontFamily">
+                    <option value="Arial">Arial</option>
+                    <option value="OpenDyslexic">OpenDyslexic</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+
+                <label for="fontSize">Font Size</label>
+                <input type="range" id="fontSize" min="10" max="30" value="18">
+                <div id="fontSizeValue">18px</div>
+
+                <button id="applySettingsButton">Apply Selected Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="changeFontButton">Change Font to Arial (Predefined)</button>
+
+    <script src="popup.js"></script>
 </body>
+
 </html>
