@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "WebEase",
   "version": "1.0",
-  "description": "Making the web a breeze for every reader.",
+  "description": "Simplifying web browsing for everyone",
   "permissions": [
     "activeTab",
     "scripting"
