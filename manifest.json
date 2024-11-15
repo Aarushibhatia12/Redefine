@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Change Font to Arial",
+  "name": "WebEase",
   "version": "1.0",
-  "description": "Change the font of the current webpage to Arial.",
+  "description": "Change the font of the current webpage to OpenDyslexic.",
   "permissions": [
     "activeTab",
     "scripting"
