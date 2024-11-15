@@ -1,89 +1,178 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Change Font</title>
+    <title>Font Settings</title>
     <style>
+        /* General body styling */
         body {
-            width: 250px;
-            padding: 10px;
+            width: 300px;
+            padding: 20px;
             font-family: Arial, sans-serif;
+            background-color: #5FB882;
         }
 
-        .title1 {
+        /* Main title styling */
+        h1 {
+            font-family: "OpenDyslexic", Arial, sans-serif;
+            font-size: 24px;
+            color: #1A1A1A;
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+
+        h2 {
+            font-size: 14px;
+            text-align: center;
+            color: #1A1A1A;
+            font-weight: normal;
+            margin: -10px 0 20px 0;
+        }
+
+        /* Main container styling */
+        .container {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Toggle container layout */
+        .toggle-container {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
             margin-bottom: 20px;
         }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 200px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            z-index: 1;
-            right: 0;
-        }
-
-        .dropdown-content label,
-        .dropdown-content select,
-        .dropdown-content input[type="range"],
-        .dropdown-content #fontSizeValue,
-        .dropdown-content button {
-            display: block;
-            width: 100%;
-            padding: 5px;
-            margin-top: 5px;
-        }
-
-        .dropdown-content button {
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .dropdown .dropbtn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
+        .toggle-container label {
             font-size: 16px;
-            border: none;
+            color: #333;
+        }
+
+        /* Toggle switch styling */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Styling for style buttons */
+        .style-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px; /* Added gap between buttons */
+        }
+
+        .style-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #F0F0F0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .style-buttons button:hover {
+            background-color: #e0e0e0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .style-buttons button.active {
+            background-color: #333;
+            color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
-
 <body>
-    <div class="title1">
-        <h3 class="title">Change Font</h3>
-        <div class="dropdown">
-            <button class="dropbtn" id="settingsButton">⋮</button>
-            <div class="dropdown-content" id="settingsMenu">
-                <label for="fontFamily">Font Family</label>
-                <select id="fontFamily">
-                    <option value="Arial">Arial</option>
-                    <option value="OpenDyslexic">OpenDyslexic</option>
-                    <option value="Verdana">Verdana</option>
-                </select>
+    <h1>OpenDyslexic</h1>
+    <h2>Follow us on Twitter</h2>
 
-                <label for="fontSize">Font Size</label>
-                <input type="range" id="fontSize" min="10" max="30" value="18">
-                <div id="fontSizeValue">18px</div>
+    <div class="container">
+        <div class="toggle-container">
+            <label for="fontToggle">Off</label>
+            <label class="switch">
+                <input type="checkbox" id="fontToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
 
-                <button id="applySettingsButton">Apply Selected Settings</button>
-            </div>
+        <label style="font-size: 16px; color: #333; display: block; margin-bottom: 10px;">Style</label>
+        <div class="style-buttons">
+            <button id="regularButton" class="active">REGULAR</button>
+            <button id="boldButton">BOLD</button>
+            <button id="italicButton">ITALIC</button>
         </div>
     </div>
 
-    <button id="changeFontButton">Change Font to Arial (Predefined)</button>
+    <script>
+        // JavaScript for toggling active class on buttons
+        const regularButton = document.getElementById('regularButton');
+        const boldButton = document.getElementById('boldButton');
+        const italicButton = document.getElementById('italicButton');
 
-    <script src="popup.js"></script>
+        function resetActive() {
+            regularButton.classList.remove('active');
+            boldButton.classList.remove('active');
+            italicButton.classList.remove('active');
+        }
+
+        regularButton.addEventListener('click', () => {
+            resetActive();
+            regularButton.classList.add('active');
+        });
+
+        boldButton.addEventListener('click', () => {
+            resetActive();
+            boldButton.classList.add('active');
+        });
+
+        italicButton.addEventListener('click', () => {
+            resetActive();
+            italicButton.classList.add('active');
+        });
+    </script>
 </body>
-
 </html>

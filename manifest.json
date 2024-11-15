@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "WebEase",
   "version": "1.0",
-  "description": "Change the font of the current webpage to OpenDyslexic.",
+  "description": "Making the web a breeze for every reader.",
   "permissions": [
     "activeTab",
     "scripting"
